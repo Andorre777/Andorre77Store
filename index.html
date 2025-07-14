@@ -66,61 +66,60 @@
     }
 
     .coming-soon {
-  padding: 40px 20px;
-  background-color: #fff;
-  text-align: center;
-}
+      padding: 40px 20px;
+      background-color: #fff;
+      text-align: center;
+    }
 
-.coming-soon h2 {
-  font-size: 1.8rem;
-  margin-bottom: 30px;
-  color: #111;
-}
+    .coming-soon h2 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #111;
+    }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-.product-card {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
-  position: relative;
-}
+    .product-card {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      position: relative;
+    }
 
-.product-card img {
-  width: 100%;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
+    .product-card img {
+      width: 100%;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
 
-.product-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-}
+    .product-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
 
-.product-card p {
-  font-size: 0.95rem;
-  color: #333;
-}
+    .product-card p {
+      font-size: 0.95rem;
+      color: #333;
+    }
 
-.badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: orange;
-  color: white;
-  padding: 4px 8px;
-  font-size: 0.8rem;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
+    .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: orange;
+      color: white;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -138,51 +137,55 @@
   </main>
 
   <section class="coming-soon">
-  <h2>📦 Produits bientôt disponibles</h2>
-  <div class="product-grid">
+    <h2>📦 Produits bientôt disponibles</h2>
+    <div class="product-grid">
 
-    <div class="product-card">
-      <img src="ipad1.jpg" alt="iPad 1">
-      <h3>iPad 1 (Reconditionné)</h3>
-      <p>Prix estimé : 75€</p>
-      <span class="badge">Bientôt dispo</span>
+      <div class="product-card" data-nom="ipad 1 reconditionné">
+        <img src="images/ipad1.jpg" alt="iPad 1">
+        <h3>iPad 1 (Reconditionné)</h3>
+        <p>Prix estimé : 75€</p>
+        <span class="badge">Bientôt dispo</span>
+      </div>
+
+      <div class="product-card" data-nom="iphone 6 bon état">
+        <img src="https://via.placeholder.com/200x200?text=iPhone+6" alt="iPhone 6">
+        <h3>iPhone 6 (Bon état)</h3>
+        <p>Prix estimé : 50€</p>
+        <span class="badge">Bientôt dispo</span>
+      </div>
+
+      <div class="product-card" data-nom="ps4 slim 500go">
+        <img src="https://via.placeholder.com/200x200?text=PS4+Slim" alt="PS4 Slim">
+        <h3>PS4 Slim (500Go)</h3>
+        <p>Prix estimé : 120€</p>
+        <span class="badge">Bientôt dispo</span>
+      </div>
+
     </div>
+  </section>
 
-    <div class="product-card">
-      <img src="https://via.placeholder.com/200x200?text=iPhone+6" alt="iPhone 6">
-      <h3>iPhone 6 (Bon état)</h3>
-      <p>Prix estimé : 50€</p>
-      <span class="badge">Bientôt dispo</span>
-    </div>
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const products = document.querySelectorAll('.product-card');
 
-    <div class="product-card">
-      <img src="https://via.placeholder.com/200x200?text=PS4+Slim" alt="PS4 Slim">
-      <h3>PS4 Slim (500Go)</h3>
-      <p>Prix estimé : 120€</p>
-      <span class="badge">Bientôt dispo</span>
-    </div>
+    searchInput.addEventListener('input', () => {
+      const searchValue = searchInput.value.toLowerCase();
 
-  </div>
-</section>
+      products.forEach(product => {
+        const nom = product.getAttribute('data-nom').toLowerCase();
 
-<script>
-  const searchInput = document.getElementById('searchInput');
-  const products = document.querySelectorAll('.product-card');
-
-  searchInput.addEventListener('input', () => {
-    const searchValue = searchInput.value.toLowerCase();
-
-    products.forEach(product => {
-      const nom = product.getAttribute('data-nom').toLowerCase();
-
-      if (nom.includes(searchValue)) {
-        product.style.display = 'block';
-      } else {
-        product.style.display = 'none';
-      }
+        if (nom.includes(searchValue)) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
     });
-  });
-</script>
+  </script>
+
+</body>
+</html>
+
 
 
 </body>
