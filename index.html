@@ -64,6 +64,63 @@
         display: none;
       }
     }
+
+    .coming-soon {
+  padding: 40px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.coming-soon h2 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  color: #111;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.product-card p {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: orange;
+  color: white;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
   </style>
 </head>
 <body>
@@ -79,6 +136,35 @@
     <h1>Bienvenue sur Andorre77 Store</h1>
     <p>Votre boutique d’objets reconditionnés en toute confiance.</p>
   </main>
+
+  <section class="coming-soon">
+  <h2>📦 Produits bientôt disponibles</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200x200?text=iPad+1" alt="iPad 1">
+      <h3>iPad 1 (Reconditionné)</h3>
+      <p>Prix estimé : 35€</p>
+      <span class="badge">Bientôt dispo</span>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200x200?text=iPhone+6" alt="iPhone 6">
+      <h3>iPhone 6 (Bon état)</h3>
+      <p>Prix estimé : 50€</p>
+      <span class="badge">Bientôt dispo</span>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200x200?text=PS4+Slim" alt="PS4 Slim">
+      <h3>PS4 Slim (500Go)</h3>
+      <p>Prix estimé : 120€</p>
+      <span class="badge">Bientôt dispo</span>
+    </div>
+
+  </div>
+</section>
+
 
 </body>
 </html>
