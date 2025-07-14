@@ -5,24 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Andorre77 Store</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      height: 100vh;
-      background-color: #111;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      color: #111;
+    }
+
+    header {
+      background-color: #232f3e;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-family: 'Marker Felt', 'Comic Sans MS', cursive;
-      color: #00ffcc;
+      justify-content: space-between;
+      color: white;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+    }
+
+    main {
+      padding: 40px;
+      text-align: center;
     }
 
     h1 {
-      font-size: 3rem;
-      text-shadow: 2px 2px 5px #00ffcc88;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+
+    @media (max-width: 600px) {
+      .search-bar {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Andorre77 Store</h1>
+
+  <header>
+    <div class="logo">Andorre77 Store</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher un produit...">
+    </div>
+  </header>
+
+  <main>
+    <h1>Bienvenue sur Andorre77 Store</h1>
+    <p>Votre boutique d’objets reconditionnés en toute confiance.</p>
+  </main>
+
 </body>
 </html>
