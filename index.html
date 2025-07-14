@@ -128,7 +128,7 @@
   <header>
     <div class="logo">Andorre77 Store</div>
     <div class="search-bar">
-      <input type="text" placeholder="Rechercher un produit...">
+      <input id="searchInput" type="text" placeholder="Rechercher un produit...">
     </div>
   </header>
 
@@ -165,6 +165,24 @@
   </div>
 </section>
 
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const products = document.querySelectorAll('.product-card');
+
+  searchInput.addEventListener('input', () => {
+    const searchValue = searchInput.value.toLowerCase();
+
+    products.forEach(product => {
+      const nom = product.getAttribute('data-nom').toLowerCase();
+
+      if (nom.includes(searchValue)) {
+        product.style.display = 'block';
+      } else {
+        product.style.display = 'none';
+      }
+    });
+  });
+</script>
 
 
 </body>
