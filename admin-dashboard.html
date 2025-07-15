@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tableau de bord Admin</title>
+  <style>
+    body { font-family: Arial; padding: 40px; background: #f8f8f8; }
+    h1 { color: #232f3e; }
+    .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; max-width: 500px; margin: auto; }
+    button { margin-top: 20px; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Bienvenue, Andorre77 👑</h1>
+    <p>Voici ton tableau de bord admin.</p>
+    <p>Ici tu pourras un jour : ajouter des produits, voir les commandes, gérer les utilisateurs…</p>
+    <button onclick="logout()">Se déconnecter</button>
+  </div>
+
+  <script>
+    if (localStorage.getItem("userRole") !== "admin") {
+      alert("Accès refusé !");
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("userRole");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
 
