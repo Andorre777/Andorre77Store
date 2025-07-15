@@ -143,10 +143,11 @@
     footer a:hover {
       text-decoration: underline;
     }
+    
   .menu-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
+    position: absolute; /* pour coller sous la bannière */
+    top: 70px; /* ajustable selon la hauteur de ta bannière */
+    left: 20px;
     z-index: 1000;
   }
 
@@ -161,7 +162,7 @@
   .dropdown-menu {
     display: none;
     position: absolute;
-    right: 0;
+    left: 0;
     margin-top: 10px;
     background-color: white;
     border: 1px solid #ccc;
@@ -187,12 +188,11 @@
   <button class="burger-btn" onclick="toggleMenu()">☰</button>
   <div class="dropdown-menu" id="dropdownMenu">
     <a href="admin-dashboard.html">🔧 Retour au tableau de bord</a>
-    <!-- Plus tard : <a href="#">Ajouter un produit</a> -->
+    <!-- Options futures ici -->
   </div>
 </div>
 
 <script>
-  // Affiche le menu uniquement si l'user est admin
   window.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem("userRole") === "admin") {
       document.getElementById("adminMenu").style.display = "block";
@@ -204,7 +204,6 @@
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
   }
 
-  // Ferme le menu si on clique ailleurs
   window.addEventListener("click", function(e) {
     if (!e.target.matches('.burger-btn')) {
       const menu = document.getElementById("dropdownMenu");
@@ -214,6 +213,7 @@
     }
   });
 </script>
+
 
 </head>
 <body>
