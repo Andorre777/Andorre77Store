@@ -156,5 +156,9 @@
 
   <p>🛠️ Dernière mise à jour : <span id="lastUpdate"></span></p>
 </footer>
+  <script>
+  // Affiche automatiquement la date du jour comme "dernière mise à jour"
+  document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('fr-FR');
+</script>
 </body>
 </html>
