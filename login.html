@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion Admin</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding-top: 100px; }
+    input { margin: 10px; padding: 10px; width: 200px; }
+    button { padding: 10px 20px; }
+  </style>
+</head>
+<body>
+
+  <h1>Connexion à l’espace admin</h1>
+
+  <input type="text" id="username" placeholder="Nom d'utilisateur"><br>
+  <input type="password" id="password" placeholder="Mot de passe"><br>
+  <button onclick="login()">Connexion</button>
+
+  <script>
+    const adminAccount = {
+      username: "andorre77",
+      password: "adminPower123" // change ça en ce que tu veux
+    };
+
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (user === adminAccount.username && pass === adminAccount.password) {
+        alert("Connexion réussie !");
+        localStorage.setItem("userRole", "admin"); // on stocke le rôle
+        window.location.href = "admin-dashboard.html";
+      } else {
+        alert("Identifiants incorrects.");
+      }
+    }
+  </script>
+
+</body>
+</html>
 
