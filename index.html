@@ -147,14 +147,18 @@
 </head>
 <body>
 
-<header>
+<header style="display: flex; justify-content: space-between; align-items: center;">
   <div class="logo">
     <a href="index.html" style="text-decoration: none; color: white;">Andorre77 Store</a>
   </div>
   <form action="search.html" method="GET" class="search-bar">
     <input id="searchInput" name="q" type="text" placeholder="Rechercher un produit...">
   </form>
+  <div>
+    <a href="login.html" style="color: white; text-decoration: none; font-size: 0.9rem;">🔐 Admin</a>
+  </div>
 </header>
+
 
 <main>
   <h1>Bienvenue sur Andorre77 Store</h1>
@@ -212,9 +216,11 @@
   <p>📧 Contact : <a href="mailto:andorre777@gmail.com">andorre777@gmail.com</a></p>
   <p>📱 Instagram : <a href="https://instagram.com/andorre77store" target="_blank">@andorre77store</a></p>
   <p>🛠️ Dernière mise à jour : <span id="lastUpdate"></span></p>
-  <p>📄 <a href="mentions.html" style="color: #00c6ff;">Mentions légales, CGV & Conditions d’utilisation</a></p>
+  <p>📄 <a href="mentions.html" style="color: #00c6ff;">Mentions légales, CGV & Conditions</a></p>
+  <p style="font-size: 0.8rem;"><a href="login.html" style="color: #aaa;">Accès admin</a></p>
   <p>© 2025-2025 Andorre77 Store — Tous droits réservés.</p>
 </footer>
+
 
 <script>
   document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('fr-FR');
