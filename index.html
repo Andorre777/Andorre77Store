@@ -120,6 +120,28 @@
       border-radius: 4px;
       font-weight: bold;
     }
+
+    footer {
+      background-color: #232f3e;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer p {
+      color: white;
+      margin: 8px 0;
+    }
+
+    footer a {
+      color: #00c6ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -133,77 +155,71 @@
   </form>
 </header>
 
+<main>
+  <h1>Bienvenue sur Andorre77 Store</h1>
+  <p>Votre boutique d’objets reconditionnés.</p>
+</main>
 
-  <main>
-    <h1>Bienvenue sur Andorre77 Store</h1>
-    <p>Votre boutique d’objets reconditionnés.</p>
-  </main>
+<section class="coming-soon">
+  <h2>📦 Produits bientôt disponibles</h2>
+  <div class="product-grid">
 
-  <section class="coming-soon">
-    <h2>📦 Produits bientôt disponibles</h2>
-    <div class="product-grid">
-
-      <div class="product-card" data-nom="ipad 1 reconditionné">
-        <img src="images/ipad1.jpg" alt="iPad 1">
-        <h3>iPad 1 (Reconditionné)</h3>
-        <p>Prix estimé : 75€</p>
-        <span class="badge">Bientôt dispo</span>
-      </div>
-
-      <div class="product-card" data-nom="iphone 6 bon état">
-        <img src="https://via.placeholder.com/200x200?text=iPhone+6" alt="iPhone 6">
-        <h3>iPhone 6 (Bon état)</h3>
-        <p>Prix estimé : 50€</p>
-        <span class="badge">Bientôt dispo</span>
-      </div>
-
-      <div class="product-card" data-nom="ps4 slim 500go">
-        <img src="https://via.placeholder.com/200x200?text=PS4+Slim" alt="PS4 Slim">
-        <h3>PS4 Slim (500Go)</h3>
-        <p>Prix estimé : 120€</p>
-        <span class="badge">Bientôt dispo</span>
-      </div>
-
+    <div class="product-card" data-nom="ipad 1 reconditionné">
+      <img src="images/ipad1.jpg" alt="iPad 1">
+      <h3>iPad 1 (Reconditionné)</h3>
+      <p>Prix estimé : 75€</p>
+      <span class="badge">Bientôt dispo</span>
     </div>
-  </section>
 
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const products = document.querySelectorAll('.product-card');
+    <div class="product-card" data-nom="iphone 6 bon état">
+      <img src="https://via.placeholder.com/200x200?text=iPhone+6" alt="iPhone 6">
+      <h3>iPhone 6 (Bon état)</h3>
+      <p>Prix estimé : 50€</p>
+      <span class="badge">Bientôt dispo</span>
+    </div>
 
-    searchInput.addEventListener('input', () => {
-      const searchValue = searchInput.value.toLowerCase();
+    <div class="product-card" data-nom="ps4 slim 500go">
+      <img src="https://via.placeholder.com/200x200?text=PS4+Slim" alt="PS4 Slim">
+      <h3>PS4 Slim (500Go)</h3>
+      <p>Prix estimé : 120€</p>
+      <span class="badge">Bientôt dispo</span>
+    </div>
 
-      products.forEach(product => {
-        const nom = product.getAttribute('data-nom').toLowerCase();
+  </div>
+</section>
 
-        if (nom.includes(searchValue)) {
-          product.style.display = 'block';
-        } else {
-          product.style.display = 'none';
-        }
-      });
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const products = document.querySelectorAll('.product-card');
+
+  searchInput.addEventListener('input', () => {
+    const searchValue = searchInput.value.toLowerCase();
+
+    products.forEach(product => {
+      const nom = product.getAttribute('data-nom').toLowerCase();
+
+      if (nom.includes(searchValue)) {
+        product.style.display = 'block';
+      } else {
+        product.style.display = 'none';
+      }
     });
-  </script>
+  });
+</script>
 
-  <footer style="background-color: #232f3e; color: white; padding: 30px 20px; text-align: center; font-size: 0.9rem;">
+<footer>
   <p>© 2024 Andorre77 Store — Tous droits réservés.</p>
-  
-  <p>📧 Contact : <a href="mailto:andorre777@gmail.com" style="color: #00c6ff;">andorre777@gmail.com</a></p>
-  
-  <p>📱 Instagram : <a href="https://instagram.com/andorre77store" target="_blank" style="color: #00c6ff;">@andorre77store</a></p>
-
+  <p>📧 Contact : <a href="mailto:andorre777@gmail.com">andorre777@gmail.com</a></p>
+  <p>📱 Instagram : <a href="https://instagram.com/andorre77store" target="_blank">@andorre77store</a></p>
   <p>🛠️ Dernière mise à jour : <span id="lastUpdate"></span></p>
 </footer>
 
 <script>
-  // Affiche automatiquement la date du jour comme "dernière mise à jour"
   document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('fr-FR');
 </script>
 
 </body>
 </html>
-
 
 
 </body>
