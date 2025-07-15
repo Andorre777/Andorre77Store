@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Résultats de recherche - Andorre77 Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 30px auto;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .badge {
+      background-color: orange;
+      color: white;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .no-result {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #777;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Résultats de recherche</h1>
+
+  <div class="product-grid" id="results"></div>
+  <div class="no-result" id="noResult" style="display: none;">Aucun résultat trouvé.</div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q')?.toLowerCase() || '';
+
+    const produits = [
+      {
+        nom: 'ipad 1 reconditionné',
+        prix: '75€',
+        image: 'images/ipad1.jpg',
+        badge: 'Bientôt dispo'
+      },
+      {
+        nom: 'iphone 6 bon état',
+        prix: '50€',
+        image: 'https://via.placeholder.com/200x200?text=iPhone+6',
+        badge: 'Bientôt dispo'
+      },
+      {
+        nom: 'ps4 slim 500go',
+        prix: '120€',
+        image: 'https://via.placeholder.com/200x200?text=PS4+Slim',
+        badge: 'Bientôt dispo'
+      }
+    ];
+
+    const resultContainer = document.getElementById('results');
+    const noResultMessage = document.getElementById('noResult');
+
+    const filtres = produits.filter(p => p.nom.includes(query));
+
+    if (filtres.length === 0) {
+      noResultMessage.style.display = 'block';
+    } else {
+      filtres.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img src="${p.image}" alt="${p.nom}">
+          <h3>${p.nom}</h3>
+          <p>Prix estimé : ${p.prix}</p>
+          <span class="badge">${p.badge}</span>
+        `;
+        resultContainer.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
