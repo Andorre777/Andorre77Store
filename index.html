@@ -165,6 +165,18 @@
   <p>Votre boutique d’objets reconditionnés.</p>
 </main>
 
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("userRole") === "admin") {
+      const btn = document.createElement("a");
+      btn.href = "admin-dashboard.html";
+      btn.innerHTML = "<button style='margin-top:20px;'>🔧 Retour au tableau de bord</button>";
+      document.body.appendChild(btn);
+    }
+  });
+</script>
+
+
 <section class="coming-soon">
   <h2>📦 Produits bientôt disponibles</h2>
   <div class="product-grid">
