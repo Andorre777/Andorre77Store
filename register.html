@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Inscription</title>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+  <script src="firebase-config.js"></script>
 </head>
 <body>
   <h1>Créer un compte client</h1>
@@ -15,49 +19,37 @@
   </form>
   <p id="message"></p>
 
-  <p>Tu as déjà un compte ? <a href="login.html">Connecte-toi ici</a></p>
-
-<!-- Les scripts Firebase de base -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
-
-<!-- Ton fichier config (doit utiliser firebase. et PAS import) -->
-<script src="firebase-config.js"></script>
-
   <script>
-    document.getElementById("registerForm").addEventListener("submit", function(e) {
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
       const confirmPassword = document.getElementById("confirmPassword").value;
+      const message = document.getElementById("message");
 
       if (password !== confirmPassword) {
-        return document.getElementById("message").innerText = "❌ Les mots de passe ne correspondent pas !";
+        message.innerText = "❌ Les mots de passe ne correspondent pas !";
+        return;
       }
 
       firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(userCredential => {
+        .then((userCredential) => {
           const user = userCredential.user;
-
-          // Ajout d'infos dans la base
           return firebase.database().ref("users/" + user.uid).set({
-            name: name,
-            email: user.email,
+            name,
+            email,
             role: "client",
-            uid: user.uid,
             createdAt: new Date().toISOString()
           });
         })
         .then(() => {
-          document.getElementById("message").innerText = "✅ Compte créé avec succès ! Tu peux maintenant te connecter.";
+          message.innerText = "✅ Compte créé avec succès !";
           document.getElementById("registerForm").reset();
-          setTimeout(() => window.location.href = "login.html", 2000);
         })
-        .catch(error => {
-          console.error(error);
-          document.getElementById("message").innerText = "❌ " + error.message;
+        .catch((error) => {
+          message.innerText = "❌ " + error.message;
         });
     });
   </script>
