@@ -2,13 +2,34 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Tableau de bord Admin</title>*
+  <title>Tableau de bord Admin</title>
   <link rel="icon" href="images/favicon.png" type="image/png">
   <style>
     body { font-family: Arial; padding: 40px; background: #f8f8f8; }
     h1 { color: #232f3e; }
-    .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; max-width: 500px; margin: auto; }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      max-width: 800px;
+      margin: auto;
+    }
     button { margin-top: 20px; padding: 10px 20px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #232f3e;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -18,9 +39,25 @@
     <p>Voici ton tableau de bord admin.</p>
     <p>Ici tu pourras un jour : ajouter des produits, voir les commandes, gérer les utilisateurs…</p>
     <a href="index.html">
-  <button style="margin-top: 10px;">🏠 Retour au menu</button>
-</a>
+      <button>🏠 Retour au menu</button>
+    </a>
     <button onclick="logout()">Se déconnecter</button>
+  </div>
+
+  <div class="card">
+    <h2>📋 Comptes clients créés :</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Date de création</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody">
+        <!-- Users Firebase ici -->
+      </tbody>
+    </table>
   </div>
 
   <script>
@@ -35,31 +72,36 @@
     }
   </script>
 
-  <div class="card" style="margin-top: 40px;">
-  <h2>Comptes clients créés :</h2>
-  <ul id="userList"></ul>
-</div>
+  <!-- Firebase config et SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+  <script src="firebase-config.js"></script>
 
-<script src="users.js"></script>
-<script>
-  const users = getUsers();
-  const list = document.getElementById("userList");
-  users.forEach(user => {
-    if (user.role === "client") {
-      const li = document.createElement("li");
-      li.innerText = `${user.name} – ${user.email}`;
-      list.appendChild(li);
-    }
-  });
-</script>
+  <script>
+    const userTableBody = document.getElementById("userTableBody");
 
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
-<script src="firebase-config.js"></script>
-<script src="users.js"></script>
-  
+    const dbRef = firebase.database().ref("users");
+    dbRef.once("value", snapshot => {
+      const users = snapshot.val();
+      if (users) {
+        Object.values(users).forEach(user => {
+          if (user.role === "client") {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${user.name}</td>
+              <td>${user.email}</td>
+              <td>${user.createdAt || "Inconnue"}</td>
+            `;
+            userTableBody.appendChild(tr);
+          }
+        });
+      } else {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td colspan="3">Aucun utilisateur trouvé</td>`;
+        userTableBody.appendChild(tr);
+      }
+    });
+  </script>
 </body>
 </html>
-
