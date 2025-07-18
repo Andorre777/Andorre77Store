@@ -1,19 +1,58 @@
 // users.js
 
-// Fonction pour récupérer les utilisateurs depuis localStorage
-function getUsers() {
-  return JSON.parse(localStorage.getItem("users") || "[]");
+// === Enregistrement (inscription) ===
+function registerUser(email, password) {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+      console.log("✅ Compte créé :", user.email);
+
+      // Tu peux aussi enregistrer d'autres infos dans la DB
+      firebase.database().ref("users/" + user.uid).set({
+        email: user.email,
+        uid: user.uid,
+        createdAt: new Date().toISOString()
+      });
+
+      alert("Compte créé avec succès !");
+      window.location.href = "login.html";
+    })
+    .catch(error => {
+      console.error("❌ Erreur lors de l'inscription :", error.message);
+      alert(error.message);
+    });
 }
 
-// Fonction pour sauvegarder un nouvel utilisateur
-function saveUser(newUser) {
-  const users = getUsers();
-  users.push(newUser);
-  localStorage.setItem("users", JSON.stringify(users));
-}
-
-// Fonction de vérification login
+// === Connexion ===
 function loginUser(email, password) {
-  const users = getUsers();
-  return users.find(user => user.email === email && user.password === password);
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+      console.log("✅ Connecté :", user.email);
+      alert("Connexion réussie !");
+      window.location.href = "index.html"; // ou autre page
+    })
+    .catch(error => {
+      console.error("❌ Erreur de connexion :", error.message);
+      alert("Email ou mot de passe incorrect !");
+    });
+}
+
+// === Vérifier si utilisateur est connecté ===
+function checkAuthState(callbackIfLoggedIn, callbackIfNot) {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      callbackIfLoggedIn(user);
+    } else {
+      callbackIfNot();
+    }
+  });
+}
+
+// === Déconnexion ===
+function logoutUser() {
+  firebase.auth().signOut().then(() => {
+    alert("Déconnecté avec succès !");
+    window.location.href = "login.html";
+  });
 }
