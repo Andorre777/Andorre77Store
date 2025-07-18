@@ -35,6 +35,24 @@
     }
   </script>
 
+  <div class="card" style="margin-top: 40px;">
+  <h2>Comptes clients créés :</h2>
+  <ul id="userList"></ul>
+</div>
+
+<script src="users.js"></script>
+<script>
+  const users = getUsers();
+  const list = document.getElementById("userList");
+  users.forEach(user => {
+    if (user.role === "client") {
+      const li = document.createElement("li");
+      li.innerText = `${user.name} – ${user.email}`;
+      list.appendChild(li);
+    }
+  });
+</script>
+
 </body>
 </html>
 
