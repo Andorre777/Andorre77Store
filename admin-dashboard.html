@@ -26,12 +26,12 @@
   <script>
     if (localStorage.getItem("userRole") !== "admin") {
       alert("Accès refusé !");
-      window.location.href = "login.html";
+      window.location.href = "loginAdmin.html";
     }
 
     function logout() {
       localStorage.removeItem("userRole");
-      window.location.href = "login.html";
+      window.location.href = "loginAdmin.html";
     }
   </script>
 
