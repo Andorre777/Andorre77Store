@@ -302,9 +302,13 @@
   document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('fr-FR');
 </script>
 
+  <script>
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (currentUser) {
+    document.querySelector("a[href='login.html']").style.display = "none";
+  }
+</script>
+
 </body>
 </html>
 
-
-</body>
-</html>
