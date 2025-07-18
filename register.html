@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Inscription</title>
+  <script src="users.js"></script>
+</head>
+<body>
+  <h1>Créer un compte client</h1>
+  <form id="registerForm">
+    <input type="text" id="name" placeholder="Nom complet" required><br>
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="password" id="password" placeholder="Mot de passe" required><br>
+    <input type="password" id="confirmPassword" placeholder="Confirme le mot de passe" required><br>
+    <button type="submit">S’inscrire</button>
+  </form>
+  <p id="message"></p>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        return document.getElementById("message").innerText = "❌ Les mots de passe ne correspondent pas !";
+      }
+
+      const newUser = { name, email, password, role: "client" };
+      saveUser(newUser);
+      document.getElementById("message").innerText = "✅ Compte créé avec succès ! Tu peux maintenant te connecter.";
+      document.getElementById("registerForm").reset();
+    });
+  </script>
+</body>
+</html>
