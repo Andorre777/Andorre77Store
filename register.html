@@ -2,47 +2,73 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Connexion - Andorre77 Store</title>
+  <title>Inscription - Andorre77 Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Firebase -->
   <script type="module">
-    // Import Firebase modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    // Config Firebase (mets tes vraies infos dans firebase-config.js si tu veux l'importer)
+    // Config Firebase (remplace par la tienne)
     const firebaseConfig = {
-      apiKey: "TA_CLE_API",
-      authDomain: "TON_PROJET.firebaseapp.com",
-      databaseURL: "https://TON_PROJET.firebaseio.com",
-      projectId: "TON_PROJET",
-      storageBucket: "TON_PROJET.appspot.com",
-      messagingSenderId: "ID_MESSAGE",
-      appId: "APP_ID"
+      apiKey: "AIzaSyBGddXrnVuz5L-9R_fQ3ab_VeWDWESh3ZU",
+      authDomain: "andorre77store.firebaseapp.com",
+      databaseURL: "https://andorre77store-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "andorre77store",
+      storageBucket: "andorre77store.firebasestorage.app",
+      messagingSenderId: "1081619107506",
+      appId: "1:1081619107506:web:5365bb5174eb72060e43ab"
     };
 
     // Init Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getDatabase(app);
 
-    // Gestion du formulaire de login
+    // Gestion du formulaire d'inscription
     document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("loginForm");
+      const form = document.getElementById("registerForm");
       const message = document.getElementById("message");
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const email = document.getElementById("email").value;
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+          message.textContent = "❌ Les mots de passe ne correspondent pas !";
+          message.style.color = "red";
+          return;
+        }
 
         try {
-          const userCredential = await signInWithEmailAndPassword(auth, email, password);
-          message.textContent = "✅ Connexion réussie ! Redirection...";
+          // Création du compte
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          // Mettre à jour le profil avec le nom
+          await updateProfile(user, { displayName: name });
+
+          // Enregistrer dans la base de données
+          await set(ref(db, "users/" + user.uid), {
+            name: name,
+            email: email,
+            role: "client",
+            createdAt: new Date().toISOString()
+          });
+
+          message.textContent = "✅ Compte créé avec succès ! Redirection...";
           message.style.color = "green";
+          form.reset();
+
           setTimeout(() => {
-            window.location.href = "index.html"; // Page après connexion
+            window.location.href = "login.html";
           }, 1500);
+
         } catch (error) {
           message.textContent = "❌ " + error.message;
           message.style.color = "red";
@@ -63,7 +89,7 @@
       height: 100vh;
       margin: 0;
     }
-    .login-container {
+    .register-container {
       background: #2f2f45;
       padding: 30px;
       border-radius: 12px;
@@ -115,16 +141,19 @@
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h1>Connexion</h1>
-    <form id="loginForm">
+  <div class="register-container">
+    <h1>Créer un compte</h1>
+    <form id="registerForm">
+      <input type="text" id="name" placeholder="Nom complet" required>
       <input type="email" id="email" placeholder="Email" required>
       <input type="password" id="password" placeholder="Mot de passe" required>
-      <button type="submit">Se connecter</button>
+      <input type="password" id="confirmPassword" placeholder="Confirmer le mot de passe" required>
+      <button type="submit">S’inscrire</button>
     </form>
     <p id="message"></p>
-    <p><a href="register.html">Créer un compte</a></p>
+    <p><a href="login.html">Déjà un compte ? Se connecter</a></p>
   </div>
 </body>
 </html>
+
 
